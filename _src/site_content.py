@@ -394,3 +394,56 @@ FOOTER = {
              ("Questions fréquentes", "pages/questions-frequentes/"), ("Contact", "pages/contact/")],
     "ELYA": [("Notre histoire", "pages/notre-histoire/"), ("Nos matières", "pages/nos-matieres/"), ("Conseils de style", "blogs/conseils/")],
 }
+
+# Récits illustrés des collections (remplacent les blocs de texte SEO).
+# Mosaïque : ("video", nom) renvoie vers TikTok, ("img", url) vers Instagram.
+STORIES = {
+    "tuniques-longues-femme": dict(
+        img_big=IMG + "IMG-1354.png", img_small=IMG + "photo_2026-09-11_10-25-43.jpg",
+        h2="La tunique longue, pièce maîtresse",
+        p="""Une tunique bien coupée, un pantalon large ou une jupe fluide, et la tenue est faite. Chez ELYA, chaque <strong>tunique longue femme</strong> est couvrante sans être lourde, avec ce détail qui change tout : une cape, un laçage, une ceinture.""",
+        picks_title="Laquelle est faite pour toi ?",
+        picks=[("lenvol-tunique-cape-asymetrique-blanc", "Pour être remarquée", "Une cape asymétrique qui flotte à chaque pas."),
+               ("laurore-tunique-longue-noir", "Pour une silhouette très longue", "139 cm et un laçage au dos qui sculpte la taille."),
+               ("leveil-tunique-ceinturee-marron", "Pour chaque jour", "Longue, opaque, ceinturée : sans réfléchir."),
+               ("le-sillage-tunique-a-liens-beige", "Pour réveiller un basique", "À superposer sur ce que tu as déjà.")],
+        mosaic=[("video", "envol-blanc-porte"), ("img", IMG + "IMG-1361.png"), ("img", IMG + "photo_2026-09-04_14-29-35.jpg")],
+        h2b="Des matières qui respirent",
+        pb="""Tencel soyeux ou coton opaque : nos tuniques se portent du matin au soir. Découvre <a href="{root}pages/nos-matieres/">nos matières</a>, trouve ta taille dans le <a href="{root}pages/guide-des-tailles/">guide des tailles</a>, et pioche des idées dans nos <a href="{root}blogs/conseils/tenue-femme-voilee-chic-idees-looks/">10 looks de femme voilée chic</a>."""),
+    "ensembles-modestes": dict(
+        img_big=IMG + "CD54A2FF-4FCB-4D71-8FDB-3D9C17641044.png", img_small=IMG + "43203146-5DE7-482D-AE3F-4FE2625B03EF.jpg",
+        h2="Déjà assortis, jamais ennuyeux",
+        p="""Un <strong>ensemble modeste</strong>, c’est une tenue complète en un geste. Haut et bas pensés ensemble, longs et opaques, à porter complets les jours pressés ou dépareillés quand l’envie te prend.""",
+        picks_title="Jupe longue ou trois pièces ?",
+        picks=[("lepure-ensemble-jupe-bordeaux", "Ensemble jupe longue", "Haut et jupe en coton, taille à nouer."),
+               ("ensemble-horizon-bordeaux", "Ensemble 3 pièces", "Tunique, pantalon fluide et ceinture."),
+               ("lepure-ensemble-jupe-marron", "Pour un mariage", "La jupe longue, un hijab assorti, un sac structuré."),
+               ("ensemble-horizon-marron", "Pour voyager léger", "Peu froissable, il se porte de mille façons.")],
+        mosaic=[("video", "epure-bordeaux"), ("img", IMG + "photo_2026-09-07_21-52-29.jpg"), ("img", IMG + "5B0011A7-3302-447E-9FF5-3652D7FB8872.png")],
+        h2b="Une tenue, plusieurs vies",
+        pb="""Porte la jupe de <a href="{root}products/lepure-ensemble-jupe-bordeaux/">L’Épure</a> avec une chemise, la tunique de <a href="{root}products/ensemble-horizon-bordeaux/">L’Horizon</a> sur une jupe de ton dressing. Nos conseils pour un <a href="{root}blogs/conseils/tenue-femme-voilee-invitee-mariage/">mariage</a> et pour <a href="{root}blogs/conseils/comment-porter-une-jupe-longue/">porter une jupe longue</a> t’attendent sur le blog."""),
+    "tenue-femme-voilee-chic": dict(
+        img_big=IMG + "photo_2026-09-11_10-25-36.jpg", img_small=IMG + "B4A2E684-8C01-4005-A862-5472F1400F38.jpg",
+        h2="Couverte, à l’aise, et chic",
+        p="""Une <strong>tenue de femme voilée chic</strong> tient à peu de choses : des pièces longues et unies, un hijab ton sur ton, un seul détail fort. Le reste, c’est ton allure.""",
+        picks_title="Quatre façons d’être élégante",
+        picks=[("lenvol-tunique-cape-asymetrique-aubergine", "Le caractère", "La cape aubergine, avec un pantalon droit."),
+               ("laurore-tunique-longue-blanc", "La lumière", "Le blanc long, lacé au dos, pour l’été comme l’hiver."),
+               ("lepure-ensemble-jupe-bordeaux", "L’occasion", "La jupe longue bordeaux, pour les grands jours."),
+               ("ensemble-horizon-marron", "Le quotidien", "Le marron, ceinturé, du lundi au dimanche.")],
+        mosaic=[("video", "horizon-marron"), ("img", IMG + "6CE7616A-CD52-4038-8399-4AD3EEAF9384.png"), ("img", IMG + "photo_2026-09-04_22-07-39.jpg")],
+        h2b="Inspire-toi, on te montre tout",
+        pb="""Chaque semaine, de nouvelles tenues sur nos réseaux, et plus d’idées dans <a href="{root}blogs/conseils/tenue-femme-voilee-chic-idees-looks/">10 looks de femme voilée chic</a> et notre guide de la <a href="{root}blogs/conseils/tenue-modeste-hiver-superposition/">tenue modeste en hiver</a>."""),
+    "laube-collection-i": dict(
+        img_big=IMG + "photo_2026-09-11_10-25-40.jpg", img_small=IMG + "0F21475B-2023-4CB6-A6EA-8417F79F322D.jpg",
+        h2="L’Aube, là où tout commence",
+        p="""Notre première collection pose les bases : des <a href="{root}collections/tuniques-longues-femme/">tuniques longues</a> au détail travaillé, des <a href="{root}collections/ensembles-modestes/">ensembles</a> déjà assortis, et une palette chaude qui traverse les saisons.""",
+        picks_title="Les incontournables de L’Aube",
+        picks=[("lenvol-tunique-cape-asymetrique-blanc", "La signature", "L’Envol et sa cape asymétrique."),
+               ("lepure-ensemble-jupe-bordeaux", "L’ensemble", "L’Épure, jupe longue en coton."),
+               ("laurore-tunique-longue-noir", "La silhouette", "L’Aurore, longue et lacée."),
+               ("le-sillage-tunique-a-liens-beige", "Le détail", "Le Sillage, à superposer.")],
+        mosaic=[("video", "sillage-beige"), ("img", IMG + "1A8A7D15-122C-4048-82A0-77A6BA283CD7.png"), ("img", IMG + "ACCEE1D3-76FD-4146-AD8B-9AA3AC0B0FB3.jpg")],
+        h2b="Une histoire à suivre",
+        pb="""Découvre <a href="{root}pages/notre-histoire/">notre histoire</a> et nos tissus choisis en Turquie. La Collection 02 arrive bientôt : rejoins la liste privée pour être la première informée."""),
+}
