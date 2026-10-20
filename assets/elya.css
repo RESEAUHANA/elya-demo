@@ -220,10 +220,6 @@ th{background:var(--ivoire-2);font-weight:600}
 .link{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;border-bottom-color:transparent;transition:background-size .4s,border-color .4s}
 .link{border-bottom:1px solid rgba(46,32,27,.25)}
 .link:hover{background-size:100% 1px}
-.marquee{overflow:hidden;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne);background:var(--ivoire-2);padding:16px 0}
-.marquee-track{display:flex;gap:56px;width:max-content;animation:defile 38s linear infinite;font-family:var(--serif);font-size:20px;font-style:italic;color:var(--chocolat-2);white-space:nowrap}
-.marquee-track span::after{content:"✦";font-style:normal;font-size:12px;margin-left:56px;color:var(--camel)}
-@keyframes defile{to{transform:translateX(-50%)}}
 
 /* ===== Vidéos ===== */
 .hero video.hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
@@ -269,3 +265,18 @@ th{background:var(--ivoire-2);font-weight:600}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .rv{opacity:1;transform:none}
 }
+
+/* ===== Bandeaux éditoriaux ===== */
+.band{background:var(--ivoire-2);text-align:center;padding:clamp(48px,7vw,84px) 0;border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne)}
+.band .orn{display:block;width:44px;height:1px;background:var(--camel);margin:0 auto 22px;position:relative}
+.band .orn::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;border:1px solid var(--camel);background:inherit;transform:translate(-50%,-50%) rotate(45deg)}
+.band .eyebrow{margin-bottom:14px}
+.band-text{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(22px,3vw,32px);line-height:1.35;color:var(--chocolat-2);max-width:24em;margin:0 auto}
+.band .link{display:inline-block;margin-top:24px}
+.band.dark{background:var(--chocolat);border-color:var(--chocolat)}
+.band.dark .band-text{color:var(--ivoire)}
+.band.dark .eyebrow{color:var(--sable)}
+.band.dark .link{color:var(--ivoire);border-bottom-color:rgba(246,242,235,.35)}
+.band.dark .orn{background:var(--camel)}
+.band.dark .orn::after{background:var(--chocolat)}
+.band + section{padding-top:clamp(56px,8vw,100px)}

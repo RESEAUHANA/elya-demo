@@ -91,6 +91,12 @@ def crumbs_html(items, r):
     return '<nav class="crumbs wrap" aria-label="Fil d’Ariane">' + " / ".join(parts) + "</nav>"
 
 
+def band(eyebrow, text, link=None, dark=False):
+    more = f'<a class="link" href="{link[1]}">{esc(link[0])}</a>' if link else ""
+    return (f'<aside class="band{" dark" if dark else ""}"><div class="narrow"><span class="orn" aria-hidden="true"></span>'
+            f'<p class="eyebrow">{esc(eyebrow)}</p><p class="band-text">{esc(text)}</p>{more}</div></aside>')
+
+
 def faq_html(faq):
     if not faq:
         return ""
@@ -163,7 +169,7 @@ document.querySelectorAll('[data-demo]').forEach(function(a){{a.addEventListener
   var h=document.querySelector('.header');
   addEventListener('scroll',function(){{h.classList.toggle('scrolled',scrollY>10)}},{{passive:true}});
   var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*';
+  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*,.band .narrow>*';
   var els=[].slice.call(document.querySelectorAll(sel));
   els.forEach(function(e){{var sib=[].slice.call(e.parentNode.children).filter(function(c){{return c.matches(sel)}});e.style.setProperty('--d',Math.min(sib.indexOf(e),6)*0.08+'s');e.classList.add('rv')}});
   var io=new IntersectionObserver(function(en){{en.forEach(function(x){{if(x.isIntersecting){{x.target.classList.add('in');io.unobserve(x.target)}}}})}},{{rootMargin:'0px 0px -8% 0px'}});
@@ -251,6 +257,7 @@ def build_products(P):
     </div>
   </div>
 </div>
+{band("Fabriqué en Turquie", "Une pièce pensée pour se porter longue, couverte et légère, saison après saison.")}
 <section style="padding-top:20px">
   <div class="wrap"><div class="sec-head"><h2>Tu aimeras aussi</h2><a class="link" href="{r}collections/{coll}/">Voir tout</a></div>
   <div class="grid">{"".join(card(q, r) for q in related)}</div></div>
@@ -275,6 +282,7 @@ def build_collections(P):
 <div class="wrap coll-head"><h1>{esc(c["title"])}</h1><p>{esc(c["intro"])}</p></div>
 <div class="wrap"><div class="toolbar"><span>{len(items)} pièces</span><span>Trier : nouveautés</span></div>
 <div class="grid">{"".join(card(p, r) for p in items)}</div></div>
+{band(c["band"][0], c["band"][1]) if c.get("band") else ""}
 <section><div class="narrow rich">{fill(c["body"], r)}{('<h2>Questions fréquentes</h2>' + faq_html(c["faq"])) if c["faq"] else ""}</div></section>"""
         ld = crumbs_ld(crumbs) + (faq_ld(c["faq"]) if c["faq"] else "")
         write(path, layout(path, c["seo_title"], c["meta"], body, r, ld, current=path))
@@ -363,7 +371,6 @@ def build_home(P, arts):
   <div class="hero-in"><p class="eyebrow" style="color:var(--sable)">L’Aube — Collection I</p><h1>{esc(hm["h1"])}</h1><p>{esc(hm["hero_text"])}</p>
   <a class="btn light" href="{r}collections/laube-collection-i/">Découvrir la collection</a></div>
 </section>
-<div class="marquee" aria-hidden="true"><div class="marquee-track">{"".join(f"<span>{t}</span>" for t in ["Tissus sélectionnés en Turquie", "Tencel et coton", "Coupes longues et couvrantes", "Du 36 au 42", "Le vestiaire modeste, autrement"] * 2)}</div></div>
 <section><div class="wrap"><div class="tiles">{tiles_html}</div></div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="sec-head"><div><p class="eyebrow">ELYA en mouvement</p><h2>Le tombé, en vrai</h2></div><a class="link" href="{C.SITE["tiktok"]}">Suivre sur TikTok</a></div>
@@ -373,7 +380,8 @@ def build_home(P, arts):
   <div class="sec-head"><div><p class="eyebrow">Les pièces de L’Aube</p><h2>Tuniques longues et ensembles modestes</h2></div><a class="link" href="{r}collections/laube-collection-i/">Tout voir</a></div>
   <div class="grid">{"".join(card(p, r) for p in best)}</div>
 </div></section>
-<section style="padding-top:0"><div class="wrap split">
+{band("L’esprit ELYA", "Des lignes longues, des matières qui respirent, une allure qui ne s’excuse pas d’être discrète.")}
+<section><div class="wrap split">
   <img src="{img(hm["story_img"], 1200)}" alt="Cape blanche ELYA portée devant une façade en pierre" loading="lazy">
   <div><p class="eyebrow">Le vestiaire modeste, autrement</p><h2>Ne plus choisir entre élégance, pudeur et confort</h2>
   <p>ELYA imagine des pièces longues, fluides et couvrantes, pensées pour accompagner les femmes au quotidien. Des coupes faciles à porter, des détails qui font la différence et une palette intemporelle.</p>
@@ -386,6 +394,7 @@ def build_home(P, arts):
   <div><b>Du 36 au 42</b><span>Guide des tailles détaillé</span></div>
   <div><b>Point relais offert</b><span>Sur ta première commande</span></div>
 </div></div>
+{band("Tissus sélectionnés en Turquie", "Tencel soyeux, coton dense et opaque : la matière fait l’allure, bien avant le détail.", ("Découvrir nos matières", r + "pages/nos-matieres/"), dark=True)}
 <section><div class="teaser">
   {video(r, "collection-02-teaser")}
   <div class="txt"><p class="eyebrow" style="color:var(--sable)">Bientôt</p><h2>Collection 02</h2>

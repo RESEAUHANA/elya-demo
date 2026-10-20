@@ -79,6 +79,7 @@ ENSEMBLES = ["lepure-ensemble-jupe-bordeaux", "ensemble-horizon-bordeaux", "lepu
 
 COLLECTIONS = {
     "tuniques-longues-femme": dict(
+        band=("La tunique ELYA", "Une seule pièce, et la tenue prend une autre allure : une cape, un laçage, une ceinture."),
         title="Tuniques longues femme",
         seo_title="Tunique longue femme élégante et couvrante | ELYA",
         meta="Tuniques longues femme élégantes, fluides et opaques : cape asymétrique, laçage au dos, ceinture à nouer. Mode modeste en Tencel et coton.",
@@ -105,6 +106,7 @@ COLLECTIONS = {
             ("Quelle taille choisir pour une tunique taille unique ?", "Nos tuniques en taille unique conviennent du 36 au 42. Les mesures exactes de chaque modèle sont indiquées sur sa fiche et dans le guide des tailles."),
         ]),
     "ensembles-modestes": dict(
+        band=("Déjà assortis", "Haut et bas pensés ensemble, pour une silhouette harmonieuse en un seul geste."),
         title="Ensembles modestes",
         seo_title="Ensemble modeste femme : jupe longue et 3 pièces | ELYA",
         meta="Ensembles modestes femme déjà assortis : ensemble jupe longue et haut, ensemble 3 pièces tunique et pantalon. Opaques, élégants, du 36 au 42.",
@@ -127,6 +129,7 @@ COLLECTIONS = {
             ("Les ensembles sont-ils opaques ?", "Oui, tous nos ensembles sont confectionnés dans des tissus opaques."),
         ]),
     "tenue-femme-voilee-chic": dict(
+        band=("Le luxe discret", "Peu de pièces, mais les bonnes : unies, longues, et un hijab ton sur ton."),
         title="Tenue femme voilée chic",
         seo_title="Tenue femme voilée chic et moderne | ELYA",
         meta="Toutes nos tenues pour femme voilée, chic et modernes : tuniques longues, ensembles jupe longue, pièces à cape. Mode modeste haut de gamme.",
@@ -151,6 +154,7 @@ COLLECTIONS = {
             ("Livrez-vous partout en France ?", "Oui, nous livrons en France métropolitaine, avec la livraison en point relais offerte sur ta première commande."),
         ]),
     "laube-collection-i": dict(
+        band=("L’Aube — Collection I", "Ivoire, sable, chocolat, bordeaux : une palette chaude et silencieuse, faite pour durer."),
         title="L’Aube — Collection I",
         seo_title="L’Aube, première collection de mode modeste | ELYA",
         meta="L’Aube, la première collection ELYA : tuniques longues et ensembles modestes aux lignes fluides, en Tencel et coton. Fabriquée en Turquie.",
