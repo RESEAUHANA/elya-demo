@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/elya.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Questions fréquentes", "item": "https://elyacollection.com/pages/questions-frequentes/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment choisir ma taille ?", "acceptedAnswer": {"@type": "Answer", "text": "La taille disponible est indiquée sur chaque fiche produit. Certains modèles sont proposés en taille unique (du 36 au 42), d’autres en plusieurs tailles. Consulte notre guide des tailles pour comparer les mesures."}}, {"@type": "Question", "name": "Où sont fabriquées les pièces ELYA ?", "acceptedAnswer": {"@type": "Answer", "text": "Les pièces de la Collection I — L’Aube sont fabriquées en Turquie et sélectionnées avec attention par ELYA."}}, {"@type": "Question", "name": "Quels sont les délais de livraison ?", "acceptedAnswer": {"@type": "Answer", "text": "Les commandes sont généralement préparées sous 1 à 3 jours ouvrés. Les options de livraison et leurs délais estimés sont indiqués au moment de la commande."}}, {"@type": "Question", "name": "La livraison est-elle offerte ?", "acceptedAnswer": {"@type": "Answer", "text": "La livraison en point relais est offerte sur ta première commande. Le seuil de livraison offerte pour les commandes suivantes est indiqué au moment du paiement."}}, {"@type": "Question", "name": "Puis-je retourner un article ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Tu disposes de 14 jours à compter de la réception pour exercer ton droit de rétractation. L’article peut être essayé, mais doit être retourné dans son état d’origine, avec ses étiquettes, sans avoir été lavé ni porté."}}, {"@type": "Question", "name": "Les frais de retour sont-ils à ma charge ?", "acceptedAnswer": {"@type": "Answer", "text": "En cas de changement d’avis, oui. Si tu reçois un article incorrect, endommagé ou défectueux, contacte-nous : les frais ne seront pas à ta charge."}}, {"@type": "Question", "name": "Comment entretenir mes pièces ?", "acceptedAnswer": {"@type": "Answer", "text": "Les instructions propres à chaque modèle sont sur son étiquette. Retrouve aussi nos conseils dans la page Nos matières."}}, {"@type": "Question", "name": "Comment contacter ELYA ?", "acceptedAnswer": {"@type": "Answer", "text": "Par e-mail à contact@elyacollection.com. Nous répondons dans les meilleurs délais."}}]}</script>
 </head>
 <body>
@@ -34,7 +35,7 @@
 <div class="wrap"></div>
 <div class="narrow rich" style="padding-bottom:70px"><div class="faq"><details><summary>Comment choisir ma taille ?</summary><p>La taille disponible est indiquée sur chaque fiche produit. Certains modèles sont proposés en taille unique (du 36 au 42), d’autres en plusieurs tailles. Consulte notre guide des tailles pour comparer les mesures.</p></details><details><summary>Où sont fabriquées les pièces ELYA ?</summary><p>Les pièces de la Collection I — L’Aube sont fabriquées en Turquie et sélectionnées avec attention par ELYA.</p></details><details><summary>Quels sont les délais de livraison ?</summary><p>Les commandes sont généralement préparées sous 1 à 3 jours ouvrés. Les options de livraison et leurs délais estimés sont indiqués au moment de la commande.</p></details><details><summary>La livraison est-elle offerte ?</summary><p>La livraison en point relais est offerte sur ta première commande. Le seuil de livraison offerte pour les commandes suivantes est indiqué au moment du paiement.</p></details><details><summary>Puis-je retourner un article ?</summary><p>Oui. Tu disposes de 14 jours à compter de la réception pour exercer ton droit de rétractation. L’article peut être essayé, mais doit être retourné dans son état d’origine, avec ses étiquettes, sans avoir été lavé ni porté.</p></details><details><summary>Les frais de retour sont-ils à ma charge ?</summary><p>En cas de changement d’avis, oui. Si tu reçois un article incorrect, endommagé ou défectueux, contacte-nous : les frais ne seront pas à ta charge.</p></details><details><summary>Comment entretenir mes pièces ?</summary><p>Les instructions propres à chaque modèle sont sur son étiquette. Retrouve aussi nos conseils dans la page Nos matières.</p></details><details><summary>Comment contacter ELYA ?</summary><p>Par e-mail à contact@elyacollection.com. Nous répondons dans les meilleurs délais.</p></details></div></div>
 </main>
-<section class="newsletter">
+<section class="newsletter" id="liste-privee">
   <div class="narrow">
     <p class="eyebrow" style="color:var(--sable)">Liste privée</p>
     <h2>Rejoins la liste privée ELYA</h2>
@@ -55,6 +56,19 @@
 <script>
 function demo(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window._t);window._t=setTimeout(function(){e.classList.remove('show')},3200)}
 document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();demo('Fonction disponible dans la version Shopify du site.')})});
+(function(){
+  var h=document.querySelector('.header');
+  addEventListener('scroll',function(){h.classList.toggle('scrolled',scrollY>10)},{passive:true});
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(e){var sib=[].slice.call(e.parentNode.children).filter(function(c){return c.matches(sel)});e.style.setProperty('--d',Math.min(sib.indexOf(e),6)*0.08+'s');e.classList.add('rv')});
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  var vids=[].slice.call(document.querySelectorAll('video[data-auto]'));
+  var vo=new IntersectionObserver(function(en){en.forEach(function(x){var v=x.target;if(x.isIntersecting&&!calm){v.play().catch(function(){})}else{v.pause()}})},{threshold:.25});
+  vids.forEach(function(v){v.muted=true;vo.observe(v)});
+})();
 </script>
 </body>
 </html>

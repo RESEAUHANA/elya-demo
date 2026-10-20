@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/elya.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Tenue femme voilée chic", "item": "https://elyacollection.com/collections/tenue-femme-voilee-chic/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Comment avoir une tenue de femme voilée chic ?", "acceptedAnswer": {"@type": "Answer", "text": "Mise sur des pièces longues et unies, un hijab assorti à la tenue et un seul détail fort, comme une cape ou une ceinture. Les accessoires sobres finissent le look."}}, {"@type": "Question", "name": "Où sont fabriquées les pièces ELYA ?", "acceptedAnswer": {"@type": "Answer", "text": "Les pièces de notre première collection, L’Aube, sont fabriquées en Turquie et sélectionnées avec attention par ELYA."}}, {"@type": "Question", "name": "Livrez-vous partout en France ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, nous livrons en France métropolitaine, avec la livraison en point relais offerte sur ta première commande."}}]}</script>
 </head>
 <body>
@@ -46,7 +47,7 @@
 <p>Pour aller plus loin, découvre nos <a href="../../blogs/conseils/tenue-femme-voilee-chic-idees-looks/">10 idées de looks</a> et nos conseils pour une <a href="../../blogs/conseils/tenue-modeste-hiver-superposition/">tenue modeste en hiver</a>.</p>
 <h2>Questions fréquentes</h2><div class="faq"><details><summary>Comment avoir une tenue de femme voilée chic ?</summary><p>Mise sur des pièces longues et unies, un hijab assorti à la tenue et un seul détail fort, comme une cape ou une ceinture. Les accessoires sobres finissent le look.</p></details><details><summary>Où sont fabriquées les pièces ELYA ?</summary><p>Les pièces de notre première collection, L’Aube, sont fabriquées en Turquie et sélectionnées avec attention par ELYA.</p></details><details><summary>Livrez-vous partout en France ?</summary><p>Oui, nous livrons en France métropolitaine, avec la livraison en point relais offerte sur ta première commande.</p></details></div></div></section>
 </main>
-<section class="newsletter">
+<section class="newsletter" id="liste-privee">
   <div class="narrow">
     <p class="eyebrow" style="color:var(--sable)">Liste privée</p>
     <h2>Rejoins la liste privée ELYA</h2>
@@ -67,6 +68,19 @@
 <script>
 function demo(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window._t);window._t=setTimeout(function(){e.classList.remove('show')},3200)}
 document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();demo('Fonction disponible dans la version Shopify du site.')})});
+(function(){
+  var h=document.querySelector('.header');
+  addEventListener('scroll',function(){h.classList.toggle('scrolled',scrollY>10)},{passive:true});
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(e){var sib=[].slice.call(e.parentNode.children).filter(function(c){return c.matches(sel)});e.style.setProperty('--d',Math.min(sib.indexOf(e),6)*0.08+'s');e.classList.add('rv')});
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  var vids=[].slice.call(document.querySelectorAll('video[data-auto]'));
+  var vo=new IntersectionObserver(function(en){en.forEach(function(x){var v=x.target;if(x.isIntersecting&&!calm){v.play().catch(function(){})}else{v.pause()}})},{threshold:.25});
+  vids.forEach(function(v){v.muted=true;vo.observe(v)});
+})();
 </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/elya.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ensembles modestes", "item": "https://elyacollection.com/collections/ensembles-modestes/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Peut-on porter les pièces d’un ensemble séparément ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. La tunique, le haut, la jupe ou le pantalon de nos ensembles se portent aussi avec d’autres pièces de ton dressing."}}, {"@type": "Question", "name": "Quel ensemble choisir pour un mariage ?", "acceptedAnswer": {"@type": "Answer", "text": "L’Épure, avec sa jupe longue en coton, et L’Horizon ceinturé sont deux options élégantes. Ajoute un hijab assorti et un sac structuré pour un rendu habillé."}}, {"@type": "Question", "name": "Les ensembles sont-ils opaques ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, tous nos ensembles sont confectionnés dans des tissus opaques."}}]}</script>
 </head>
 <body>
@@ -44,7 +45,7 @@
 <p>Nos ensembles sont proposés du 36 au 42. Consulte le <a href="../../pages/guide-des-tailles/">guide des tailles</a> pour comparer les longueurs.</p>
 <h2>Questions fréquentes</h2><div class="faq"><details><summary>Peut-on porter les pièces d’un ensemble séparément ?</summary><p>Oui. La tunique, le haut, la jupe ou le pantalon de nos ensembles se portent aussi avec d’autres pièces de ton dressing.</p></details><details><summary>Quel ensemble choisir pour un mariage ?</summary><p>L’Épure, avec sa jupe longue en coton, et L’Horizon ceinturé sont deux options élégantes. Ajoute un hijab assorti et un sac structuré pour un rendu habillé.</p></details><details><summary>Les ensembles sont-ils opaques ?</summary><p>Oui, tous nos ensembles sont confectionnés dans des tissus opaques.</p></details></div></div></section>
 </main>
-<section class="newsletter">
+<section class="newsletter" id="liste-privee">
   <div class="narrow">
     <p class="eyebrow" style="color:var(--sable)">Liste privée</p>
     <h2>Rejoins la liste privée ELYA</h2>
@@ -65,6 +66,19 @@
 <script>
 function demo(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window._t);window._t=setTimeout(function(){e.classList.remove('show')},3200)}
 document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();demo('Fonction disponible dans la version Shopify du site.')})});
+(function(){
+  var h=document.querySelector('.header');
+  addEventListener('scroll',function(){h.classList.toggle('scrolled',scrollY>10)},{passive:true});
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(e){var sib=[].slice.call(e.parentNode.children).filter(function(c){return c.matches(sel)});e.style.setProperty('--d',Math.min(sib.indexOf(e),6)*0.08+'s');e.classList.add('rv')});
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  var vids=[].slice.call(document.querySelectorAll('video[data-auto]'));
+  var vo=new IntersectionObserver(function(en){en.forEach(function(x){var v=x.target;if(x.isIntersecting&&!calm){v.play().catch(function(){})}else{v.pause()}})},{threshold:.25});
+  vids.forEach(function(v){v.muted=true;vo.observe(v)});
+})();
 </script>
 </body>
 </html>

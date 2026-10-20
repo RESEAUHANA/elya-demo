@@ -21,6 +21,19 @@ except Exception as exc:  # le blog est optionnel tant qu'il n'est pas rédigé
 ICON_SEARCH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'
 ICON_USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>'
 ICON_BAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>'
+VIDEOS = {
+    "lenvol-tunique-cape-asymetrique-blanc": "envol-blanc-porte",
+    "lepure-ensemble-jupe-bordeaux": "epure-bordeaux",
+    "ensemble-horizon-marron": "horizon-marron",
+    "le-sillage-tunique-a-liens-beige": "sillage-beige",
+}
+
+
+def video(r, name, cls="", extra=""):
+    return (f'<video{cls} data-auto muted loop playsinline preload="metadata" poster="{r}assets/video/{name}.jpg" {extra}>'
+            f'<source src="{r}assets/video/{name}.mp4" type="video/mp4"></video>')
+
+
 ICON_MENU = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M3 12h18M3 17h18"/></svg>'
 
 esc = html.escape
@@ -107,6 +120,7 @@ def layout(path, title, meta, body, r, extra_head="", current=""):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/elya.css">
+<script>document.documentElement.classList.add('js')</script>
 {extra_head}
 </head>
 <body>
@@ -124,7 +138,7 @@ def layout(path, title, meta, body, r, extra_head="", current=""):
 <main>
 {body}
 </main>
-<section class="newsletter">
+<section class="newsletter" id="liste-privee">
   <div class="narrow">
     <p class="eyebrow" style="color:var(--sable)">Liste privée</p>
     <h2>Rejoins la liste privée ELYA</h2>
@@ -145,6 +159,19 @@ def layout(path, title, meta, body, r, extra_head="", current=""):
 <script>
 function demo(t){{var e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window._t);window._t=setTimeout(function(){{e.classList.remove('show')}},3200)}}
 document.querySelectorAll('[data-demo]').forEach(function(a){{a.addEventListener('click',function(ev){{ev.preventDefault();demo('Fonction disponible dans la version Shopify du site.')}})}});
+(function(){{
+  var h=document.querySelector('.header');
+  addEventListener('scroll',function(){{h.classList.toggle('scrolled',scrollY>10)}},{{passive:true}});
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sel='.sec-head,.tile,.card,.post,.reel,.split>*,.values>div,.coll-head,.rich>*,.faq details,.info,.gallery>*,.chapter>*,.pull,.fabrics>div,.edito>*,.teaser .txt>*';
+  var els=[].slice.call(document.querySelectorAll(sel));
+  els.forEach(function(e){{var sib=[].slice.call(e.parentNode.children).filter(function(c){{return c.matches(sel)}});e.style.setProperty('--d',Math.min(sib.indexOf(e),6)*0.08+'s');e.classList.add('rv')}});
+  var io=new IntersectionObserver(function(en){{en.forEach(function(x){{if(x.isIntersecting){{x.target.classList.add('in');io.unobserve(x.target)}}}})}},{{rootMargin:'0px 0px -8% 0px'}});
+  els.forEach(function(e){{io.observe(e)}});
+  var vids=[].slice.call(document.querySelectorAll('video[data-auto]'));
+  var vo=new IntersectionObserver(function(en){{en.forEach(function(x){{var v=x.target;if(x.isIntersecting&&!calm){{v.play().catch(function(){{}})}}else{{v.pause()}}}})}},{{threshold:.25}});
+  vids.forEach(function(v){{v.muted=true;vo.observe(v)}});
+}})();
 </script>
 </body>
 </html>"""
@@ -193,6 +220,9 @@ def build_products(P):
         gallery = "".join(
             f'<img src="{img(u, 1100)}" alt="{esc(p["alt"])} – vue {i + 1}"{"" if i == 0 else " loading=lazy"}>'
             for i, u in enumerate(p["images"]))
+        if h in VIDEOS:
+            first_end = gallery.index(">") + 1
+            gallery = gallery[:first_end] + video(r, VIDEOS[h], extra=f'aria-label="{esc(p["name"])} porté, en vidéo"') + gallery[first_end:]
         colors = "".join(
             f'<a class="chip{" on" if k == h else ""}" href="{r}products/{k}/">{esc(c)}</a>' for c, k in p["siblings"])
         sizes = "".join(
@@ -255,6 +285,9 @@ def build_pages():
         path = f"pages/{h}/"
         r = rel(path)
         crumbs = [(pg["title"], path)]
+        if pg.get("editorial"):
+            write(path, layout(path, pg["seo_title"], pg["meta"], fill(pg["body"], r), r, crumbs_ld(crumbs), current=path))
+            continue
         content = fill(pg.get("body", ""), r) + faq_html(pg.get("faq", []))
         image = f'<img class="article-hero" src="{img(pg["image"], 1600)}" alt="ELYA, mode modeste élégante" style="aspect-ratio:16/8">' if pg.get("image") else ""
         body = f"""
@@ -326,10 +359,16 @@ def build_home(P, arts):
     body = f"""
 <section class="hero" style="padding:0">
   <img src="{img(hm["hero_img"], 2000)}" alt="Femme voilée portant une cape bordeaux au vent, collection L’Aube ELYA">
+  {video(r, "envol-blanc-cape", ' class="hero-media"', 'aria-hidden="true"')}
   <div class="hero-in"><p class="eyebrow" style="color:var(--sable)">L’Aube — Collection I</p><h1>{esc(hm["h1"])}</h1><p>{esc(hm["hero_text"])}</p>
   <a class="btn light" href="{r}collections/laube-collection-i/">Découvrir la collection</a></div>
 </section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track">{"".join(f"<span>{t}</span>" for t in ["Tissus sélectionnés en Turquie", "Tencel et coton", "Coupes longues et couvrantes", "Du 36 au 42", "Le vestiaire modeste, autrement"] * 2)}</div></div>
 <section><div class="wrap"><div class="tiles">{tiles_html}</div></div></section>
+<section style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><div><p class="eyebrow">ELYA en mouvement</p><h2>Le tombé, en vrai</h2></div><a class="link" href="{C.SITE["tiktok"]}">Suivre sur TikTok</a></div>
+  <div class="reels">{"".join(f'<a class="reel" href="{r}products/{h}/">{video(r, v)}<span>{esc(t)}<small>{esc(s)}</small></span></a>' for v, h, t, s in [("envol-blanc-porte", "lenvol-tunique-cape-asymetrique-blanc", "L’Envol", "Tunique à cape · Blanc"), ("epure-bordeaux", "lepure-ensemble-jupe-bordeaux", "L’Épure", "Ensemble jupe longue · Bordeaux"), ("sillage-beige", "le-sillage-tunique-a-liens-beige", "Le Sillage", "Tunique à liens · Beige"), ("horizon-marron", "ensemble-horizon-marron", "L’Horizon", "Ensemble 3 pièces · Marron")])}</div>
+</div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="sec-head"><div><p class="eyebrow">Les pièces de L’Aube</p><h2>Tuniques longues et ensembles modestes</h2></div><a class="link" href="{r}collections/laube-collection-i/">Tout voir</a></div>
   <div class="grid">{"".join(card(p, r) for p in best)}</div>
@@ -347,7 +386,13 @@ def build_home(P, arts):
   <div><b>Du 36 au 42</b><span>Guide des tailles détaillé</span></div>
   <div><b>Point relais offert</b><span>Sur ta première commande</span></div>
 </div></div>
-<section><div class="wrap">
+<section><div class="teaser">
+  {video(r, "collection-02-teaser")}
+  <div class="txt"><p class="eyebrow" style="color:var(--sable)">Bientôt</p><h2>Collection 02</h2>
+  <p>De nouvelles silhouettes, la même exigence : des matières choisies, des lignes fluides et des pièces pensées pour durer. Quantités limitées.</p>
+  <p><a class="btn light" href="#liste-privee">Rejoindre la liste privée</a></p></div>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
   <div class="sec-head"><div><p class="eyebrow">Conseils de style</p><h2>Inspirations et idées de tenues</h2></div><a class="link" href="{r}blogs/conseils/">Tous les conseils</a></div>
   <div class="posts">{posts}</div>
 </div></section>

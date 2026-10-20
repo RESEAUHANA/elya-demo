@@ -217,23 +217,70 @@ PAGES = {
 """),
     "notre-histoire": dict(
         title="Notre histoire",
-        seo_title="Notre histoire – Une marque de mode modeste | ELYA",
-        meta="ELYA est née d’une envie simple : ne plus choisir entre élégance, pudeur et confort. Découvre l’histoire de notre marque de mode modeste.",
-        image=IMG + "photo_2026-09-11_10-25-36.jpg",
+        seo_title="Notre histoire – Mode modeste et tissus de Turquie | ELYA",
+        meta="ELYA, la mode modeste pensée comme un vestiaire de luxe discret : tissus sélectionnés en Turquie, Tencel et coton, lignes fluides et silhouettes intemporelles.",
+        editorial=True,
         body="""
-<p class="eyebrow">ELYA — le vestiaire modeste, autrement</p>
-<p>ELYA est née d’une envie simple : <strong>ne plus avoir à choisir entre élégance, pudeur et confort</strong>.</p>
-<p>Nous imaginons un vestiaire pensé pour accompagner les femmes au quotidien, avec des coupes couvrantes, des lignes fluides et des détails qui font toute la différence. Des pièces faciles à porter, à associer et à faire vivre selon son propre style.</p>
-<h2>L’Aube, notre première collection</h2>
-<p><a href="{root}collections/laube-collection-i/">L’Aube</a> marque le début de cette histoire. Une sélection pensée autour de silhouettes élégantes et intemporelles, fabriquées en Turquie : des <a href="{root}collections/tuniques-longues-femme/">tuniques longues</a> au détail travaillé et des <a href="{root}collections/ensembles-modestes/">ensembles</a> déjà assortis.</p>
-<h2>Ce qui nous guide</h2>
-<ul>
-<li><strong>Couvrant, mais jamais informe</strong> : des volumes maîtrisés, une taille que l’on peut marquer.</li>
-<li><strong>Des matières agréables</strong> : Tencel et coton, choisis pour leur tombé et leur confort.</li>
-<li><strong>Une palette intemporelle</strong> : ivoire, sable, chocolat, bordeaux, noir.</li>
-<li><strong>Des pièces qui durent</strong> : à porter et reporter, saison après saison.</li>
-</ul>
-<p>ELYA — une nouvelle façon de penser le vestiaire modeste.</p>
+<section class="edito-hero" style="padding:0">
+  <video data-auto muted loop playsinline preload="metadata" poster="{root}assets/video/envol-blanc-cape.jpg" aria-hidden="true"><source src="{root}assets/video/envol-blanc-cape.mp4" type="video/mp4"></video>
+  <div class="in"><p class="eyebrow" style="color:var(--sable)">Notre histoire</p><h1>La pudeur, comme une élégance</h1></div>
+</section>
+<nav class="crumbs wrap" aria-label="Fil d’Ariane"><a href="{root}">Accueil</a> / Notre histoire</nav>
+
+<section><div class="narrow edito">
+  <p class="lead">Il y a des vêtements que l’on porte, et d’autres qui vous portent. ELYA est née de cette nuance : l’envie d’un vestiaire où l’on n’aurait plus jamais à choisir entre <em>élégance</em>, <em>pudeur</em> et <em>confort</em>.</p>
+  <p class="drop">Tout commence par un constat, partagé par tant de femmes : la mode modeste se résumait trop souvent à couvrir. Couvrir, sans sublimer. ELYA a choisi l’inverse. Des lignes longues qui allongent la silhouette, des volumes qui respirent, une taille que l’on marque d’un simple nœud. Une allure qui ne s’excuse pas d’être discrète, et qui fait de la retenue une signature.</p>
+  <p>Ici, chaque pièce est pensée comme un essentiel. Elle se porte le lundi matin comme le samedi soir, sous la lumière d’un bureau ou dans l’effervescence d’un mariage. Elle s’associe, se superpose, se réinvente. Et elle traverse les saisons sans prendre une ride.</p>
+</div></section>
+
+<section style="padding-top:0"><blockquote class="pull">« Être couverte n’a jamais voulu dire s’effacer. »<cite>La philosophie ELYA</cite></blockquote></section>
+
+<section style="padding-top:0"><div class="wrap chapter">
+  <img src="https://elyacollection.com/cdn/shop/files/photo_2026-09-11_10-25-45.jpg?width=1200" alt="Gros plan sur le tombé fluide d’une cape blanche ELYA" loading="lazy">
+  <div class="edito">
+    <p class="num">I — La matière</p>
+    <h2>Des tissus choisis en Turquie, comme on choisit un bijou</h2>
+    <p>La Turquie est l’une des grandes terres textiles du monde. D’Istanbul à Bursa, ancienne capitale de la soie, des générations d’artisans y ont perfectionné l’art du tissage, du tombé et de la finition. C’est là qu’ELYA sélectionne ses étoffes et fait confectionner ses pièces.</p>
+    <p>Un tissu se juge d’abord à la main. Sa douceur contre la peau, la façon dont il glisse, la lumière qu’il accroche. Puis au mouvement : une cape doit flotter, une jupe doit danser, une tunique doit tomber droit sans jamais coller. Rien n’est laissé au hasard, car c’est la matière qui fait l’allure.</p>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="fabrics">
+    <div><b>Le Tencel</b><p>Une fibre née du bois, d’une douceur presque soyeuse. Respirante et fluide, elle accompagne chaque geste et reste agréable du matin au soir. L’âme de <a href="{root}products/lenvol-tunique-cape-asymetrique-blanc/">L’Envol</a> et de <a href="{root}products/leveil-tunique-ceinturee-marron/">L’Éveil</a>.</p></div>
+    <div><b>Le coton</b><p>Naturel, respirant, d’une belle opacité. Il apporte la tenue d’un vêtement bien coupé et la simplicité d’une matière que la peau connaît. L’étoffe de <a href="{root}products/lepure-ensemble-jupe-bordeaux/">L’Épure</a> et de <a href="{root}products/laurore-tunique-longue-noir/">L’Aurore</a>.</p></div>
+    <div><b>Les voiles fluides</b><p>Légers et peu froissables, pensés pour les journées qui s’étirent et les valises que l’on boucle vite. Le secret du drapé de <a href="{root}products/ensemble-horizon-bordeaux/">L’Horizon</a> et du <a href="{root}products/le-sillage-tunique-a-liens-beige/">Sillage</a>.</p></div>
+  </div>
+  <p class="center" style="margin-top:34px"><a class="link" href="{root}pages/nos-matieres/">Tout savoir sur nos matières</a></p>
+</div></section>
+
+<section><div class="wrap chapter rev">
+  <video data-auto muted loop playsinline preload="metadata" poster="{root}assets/video/epure-bordeaux.jpg" aria-label="L’Épure bordeaux portée, en mouvement"><source src="{root}assets/video/epure-bordeaux.mp4" type="video/mp4"></video>
+  <div class="edito">
+    <p class="num">II — La coupe</p>
+    <h2>Couvrante, jamais informe</h2>
+    <p>La pudeur n’impose pas l’ampleur sans forme. Chez ELYA, chaque volume est dessiné. Une manche évasée qui s’ouvre comme une corolle, un laçage au dos qui sculpte la taille, une ceinture à nouer pour choisir son allure du jour.</p>
+    <p>Les longueurs sont généreuses, les tissus opaques, les détails discrets mais précis : une surpiqûre, un bouton, un pli. Ce que l’on remarque à peine, et qui change tout.</p>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap chapter">
+  <img src="https://elyacollection.com/cdn/shop/files/photo_2026-09-11_10-25-40.jpg?width=1200" alt="Cape blanche ELYA portée devant une façade en pierre" loading="lazy">
+  <div class="edito">
+    <p class="num">III — La palette</p>
+    <h2>Des couleurs qui ne se démodent pas</h2>
+    <p>Ivoire, sable, chocolat, bordeaux, noir. Une palette chaude et silencieuse, choisie pour durer plus d’une saison et pour s’accorder d’une pièce à l’autre. On y glisse un hijab ton sur ton, un sac structuré, une paire de gants en cuir, et la silhouette se fait magazine.</p>
+    <p>C’est cela, le luxe discret : peu de choses, mais les bonnes.</p>
+  </div>
+</div></section>
+
+<section><div class="narrow edito center">
+  <p class="num">IV — L’Aube</p>
+  <h2>Le début d’une histoire</h2>
+  <p><a href="{root}collections/laube-collection-i/">L’Aube</a>, notre première collection, en pose les fondations : des <a href="{root}collections/tuniques-longues-femme/">tuniques longues</a> au détail travaillé et des <a href="{root}collections/ensembles-modestes/">ensembles</a> déjà assortis. La Collection 02 s’annonce déjà, avec la même exigence.</p>
+  <p class="lead" style="margin-top:28px">ELYA — le vestiaire modeste, autrement.</p>
+  <p style="margin-top:26px"><a class="btn" href="{root}collections/laube-collection-i/">Découvrir L’Aube</a></p>
+</div></section>
 """),
     "nos-matieres": dict(
         title="Nos matières",
