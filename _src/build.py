@@ -11,6 +11,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "_src"))
 import site_content as C  # noqa: E402
+import pdp_stories  # noqa: E402
 
 try:
     from blog_content import ARTICLES  # noqa: E402
@@ -317,9 +318,15 @@ def build_products(P):
             action = "demo('Alerte simulée : tu seras prévenue dès le retour en stock.')"
             label = "Me prévenir du retour"
         related = [q for k, q in P.items() if k != h and q["name"] != p["name"]][:8]
+        story = pdp_stories.STORIES.get(h)
+        if story:
+            desc = (f'<p>{esc(story["lead"])}</p>'
+                    f'<a class="ps-link small" href="#histoire">Découvrir la pièce en détail<span class="arr">↓</span></a>')
+        else:
+            desc = clean_body(p["body"])
         body = f"""
 {crumbs_html(crumbs, r, "pdp-crumbs")}
-<div class="wrap pdp">
+<div class="wrap pdp" id="top">
   <div class="gallery-wrap"><div class="gallery">{"".join(media)}</div><span class="gal-count">1 / {len(media)}</span><div class="dots"></div></div>
   <div class="info">
     <p class="eyebrow">{esc(p["kind"])}</p>
@@ -328,7 +335,7 @@ def build_products(P):
     <div class="perk">{ICON["truck"]}Livraison en point relais offerte sur ta première commande</div>
     <div class="opt"><div class="lbl"><span>Couleur <b>{esc(p["color"])}</b></span></div><div class="swatches">{swatches}</div></div>
     <div class="opt"><div class="lbl"><span>Taille <b data-size-label></b></span><a href="{r}pages/guide-des-tailles/">Guide des tailles</a></div><div class="chips" data-sizes>{sizes}</div></div>
-    <div class="buy"><button class="btn block" type="button" onclick="{action}">{label}</button><button class="heart" data-heart="{h}" aria-label="Ajouter aux favoris">{ICON["heart"]}</button></div>
+    <div class="buy"><button class="btn block" type="button" data-cart onclick="{action}"><span class="lbl">{label}</span></button><button class="heart" data-heart="{h}" aria-label="Ajouter aux favoris">{ICON["heart"]}</button></div>
     <ul class="reassure">
       <li>{ICON["truck"]}Préparée sous 1 à 3 jours ouvrés</li>
       <li>{ICON["return"]}Retours acceptés sous 14 jours</li>
@@ -336,14 +343,14 @@ def build_products(P):
     </ul>
     <p class="seen">Vois-la portée sur <a href="{C.SITE["instagram"]}" target="_blank" rel="noopener">{IG}Instagram</a> et <a href="{C.SITE["tiktok"]}" target="_blank" rel="noopener">{TT}TikTok</a></p>
     <div class="acc">
-      <details open><summary>Description</summary><div class="body">{clean_body(p["body"])}</div></details>
+      <details open><summary>Description</summary><div class="body">{desc}</div></details>
       <details><summary>Livraison et retours</summary><div class="body"><p>Préparation sous 1 à 3 jours ouvrés. Retours acceptés sous 14 jours. <a href="{r}pages/livraison-et-retours/">En savoir plus</a></p></div></details>
       <details><summary>Matière et entretien</summary><div class="body"><p>Retrouve la composition dans la description et nos conseils dans <a href="{r}pages/nos-matieres/">Nos matières</a>.</p></div></details>
     </div>
   </div>
 </div>
 <div class="sticky-buy"><div class="t"><b>{esc(p["name"])} — {esc(p["color"])}</b><span>{price(p["price"])}</span></div><button class="btn" type="button" onclick="{action}">{"Ajouter" if p["available"] else "Me prévenir"}</button></div>
-{band("Confectionnée en Turquie", "Une pièce pensée pour se porter longue, couverte et légère, saison après saison.")}
+{pdp_stories.render(story, p, P, r, img, esc) if story else band("Confectionnée en Turquie", "Une pièce pensée pour se porter longue, couverte et légère, saison après saison.")}
 <section style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap"><div class="sec-head"><h2>Tu aimeras aussi</h2><a class="btn ghost small" href="{r}collections/{coll}/">Voir tout</a></div>
   {rail("".join(card(q, r) for q in related))}</div>
